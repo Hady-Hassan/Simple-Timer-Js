@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>timer</title>
+    <style>
+        input
+        {
+            width: 50px;
+            margin: 5px;
+        }
+    </style>
+    <link rel="stylesheet" href="clock.css">
+
+   
+</head>
+<body>
+    
+    <center>
+        <div id = "dis"> </div>
+       <h3>hours : minutes : seconds</h3>  <br>
+        
+        <input type="number" id="hour" min="0">:
+        <input type="number" id="min" min="0">:
+        <input type="number" id="sec" min="0">
+        <select name="" id="per">
+            <option value="PM">PM</option>
+            <option value="AM">AM</option>
+
+        </select>
+        <br>
+        <br>
+        <button onclick="setimer()">Set Alarm</button> <button type="reset">reset timer</button>
+       
+
+
+
+    </center>
+    <script>
+
+        let hours = document.getElementById("hour");
+        let minutes = document.getElementById("min");
+        let seconds = document.getElementById("sec");
+        let peri = document.getElementById("per");
+
+        let check;
+
+        function setimer() 
+        {
+            console.log("timer started");
+            check =  update(hours.value) + " : " + update(minutes.value) + " : " + update(seconds.value) + " " + update(peri.value); 
+
+        }
+
+        function Time() 
+        {
+            
+            var date = new Date();
+            var h = date.getHours();
+            var m = date.getMinutes();
+            var s = date.getSeconds();
+            var period = "";
+            
+            if (h >= 12) 
+            {
+                period = "PM";
+            } 
+            else {
+                period = "AM";
+            } 
+            if (h == 0) 
+            {
+                h = 12;
+            } else {
+                if (h > 12) 
+                {
+                    h = h - 12;
+                }
+            }
+            h = update(h);
+            m = update(m);
+            s = update(s);  
+            document.getElementById("dis").innerText = h + " : " + m + " : " + s + " " + period;
+            let check2 =  h + " : " + m + " : " + s + " " + period ;
+            if(check == check2)
+            {
+                alert("alarmed!!!!!!!!!!!");
+            }
+            setTimeout(Time, 1000);
+        }
+        function update(t) 
+        {
+            if (t < 10) 
+            {
+                return "0" + t;
+            }
+            else {
+                return t;
+            }
+         }
+        Time();
+
+    </script>
+</body>
+</html>
